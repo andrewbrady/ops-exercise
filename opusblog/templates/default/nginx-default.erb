@@ -1,0 +1,13 @@
+server {
+  listen   80;
+  server_name  vagrant-ubuntu-trusty-64;
+  include hhvm.conf;
+
+  access_log  /var/log/nginx/localhost.access.log;
+
+  location / {
+    root    /usr/share/nginx/html;
+    index  index.php index.html index.htm;
+    try_files $uri $uri/ /index.php?q=$uri&$args;
+  }
+}

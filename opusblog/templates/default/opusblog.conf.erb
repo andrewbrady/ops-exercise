@@ -1,0 +1,16 @@
+server {
+ listen <%= @server_port %>;
+ server_name <%= @server_name %>;
+
+ access_log /var/log/nginx/<%= @server_name %>.access.log;
+ error_log /var/log/nginx/<%= @server_name %>.error.log;
+
+ root <%= @docroot %>;
+
+ location / {
+ fastcgi_pass 127.0.0.1:9000;
+ fastcgi_index index.php;
+ fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+ include fastcgi_params;
+ }
+}
